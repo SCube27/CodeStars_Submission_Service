@@ -7,7 +7,7 @@ async function pingRequest(req, res) {
 async function createSubmission(req, res) {
     const response = await this.submissionService.addSubmission(req.body);
 
-    res.status(201).json({
+    res.status(201).send({
         error: {},
         data: response,
         success: true,
