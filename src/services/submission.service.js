@@ -1,3 +1,4 @@
+const BadRequestError = require('../errors/badRequest');
 const SubmissionProducer = require('../producers/submissionQueue.producer');
 
 class SubmissionService {
@@ -14,7 +15,7 @@ class SubmissionService {
         const newSubmission = await this.submissionRepository.createSubmission(submission);
         // TODO: Add error handling here
         if(!newSubmission) {
-            throw {message: "Not able to create a submission!"};
+            throw new BadRequestError(`Failed to create a Submission in the repository!`);
         }
 
         const response = await SubmissionProducer(newSubmission);

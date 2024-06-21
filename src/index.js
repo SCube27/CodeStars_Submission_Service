@@ -3,9 +3,13 @@ const fastify = require('fastify')({ logger: true }); // calling the fastify con
 const app = require('./app');
 const connectToDB = require('./config/dbConfig');
 const serverConfig = require('./config/serverConfig');
+const errorHandler = require('./utils/errorHandler');
 
 // setting the routes
 fastify.register(app);
+
+// setting up the errorhandling mechanism
+fastify.setErrorHandler(errorHandler);
 
 // starting the server
 fastify.listen({ port: serverConfig.PORT }, async (err) => {
